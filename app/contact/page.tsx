@@ -8,11 +8,36 @@ export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [sent, setSent] = useState(false);
 
-  function submit(e: React.FormEvent) {
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
+
+  async function submit(e: React.FormEvent) {
     e.preventDefault();
-    // No backend wired up — this is a mock form. Point this at a real
-    // endpoint (e.g. an email API or a form service) when you're ready.
-    setSent(true);
+    setError("");
+    setSending(true);
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
+          subject: form.subject || "New message from TrendyCart contact form",
+          from_name: form.name,
+          email: form.email,
+          message: form.message
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSent(true);
+      } else {
+        setError("Couldn't send that — please try again.");
+      }
+    } catch {
+      setError("Couldn't send that — please try again.");
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -61,11 +86,13 @@ export default function ContactPage() {
                   className="w-full border border-black/10 bg-white/70 rounded-lg px-3 py-2 text-sm mt-1 outline-none focus:border-gold transition-colors resize-none"
                 />
               </div>
+                          {error ? <p className="text-rust text-xs">{error}</p> : null}
               <button
                 type="submit"
-                className="bg-ink hover:bg-gold transition-colors duration-300 text-ivory text-xs uppercase tracking-widest2 px-8 py-3.5 rounded-full"
+                disabled={sending}
+                className="bg-ink hover:bg-gold transition-colors duration-300 text-ivory text-xs uppercase tracking-widest2 px-8 py-3.5 rounded-full disabled:opacity-50"
               >
-                Send message
+                {sending ? "Sending…" : "Send message"}
               </button>
             </form>
           )}
@@ -74,9 +101,9 @@ export default function ContactPage() {
         <div>
           <p className="text-xs uppercase tracking-widest2 text-stone mb-4">Support</p>
           <div className="space-y-2 text-sm text-ink mb-8">
-            <p>hello@trendycart.example</p>
-            <p>@trendycart on Instagram</p>
-            <p>@trendycart on X</p>
+            <p>duggudurgeshpal@gmail.com</p>
+            <p>@duggu.durgesh_ on Instagram</p>
+            
           </div>
 
           <p className="text-xs uppercase tracking-widest2 text-stone mb-4">Quick answers</p>
