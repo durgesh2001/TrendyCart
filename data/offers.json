@@ -1,13 +1,15 @@
 [
   {
-    "id": "57c3106b-f3ed-4039-9f30-bd793e4074ce",
-    "title": "Swiggy Spin",
-    "image": "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2026/6/15/5e396537-6164-4668-8b0c-429feadfbf9d_60379.JPG",
-    "details": "7-0% off",
+    "id": "3837acec-3dc6-4826-af51-1fcaabbe3508",
+    "title": "Bigbasket ₹150 FREE Order",
+    "image": "https://www.instagram.com/p/DQ_iqmKD7zV/",
+    "details": "Try any of below codes \n\nCode : BBCHLB108 | BBCHLB208 | BBCHLB308 | BBCHLB408",
     "steps": [
-      "Open app and check spin"
+      "➤ Place an order worth ₹150+ on Bigbasket and apply the code.",
+      "➤ Try it on both new and existing accounts.",
+      "➤ This is an account-specific offer. If the code works for your account, you can get an order worth up to ₹150 for FREE."
     ],
-    "url": "https://www.swiggy.com/restaurants",
-    "createdAt": "2026-08-23T16:38:58.810Z"
+    "url": "https://www.bigbasket.com/",
+    "createdAt": "2026-08-24T17:05:29.112Z"
   }
 ]
