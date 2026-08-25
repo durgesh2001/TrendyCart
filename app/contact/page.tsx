@@ -1,9 +1,46 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";     
+import Link from "next/link";
 import Footer from "@/components/Footer";
 import Image from "next/image";
+
+// Edit hrefs here if you add more socials later.
+const SOCIAL_LINKS = [
+  {
+    name: "Instagram",
+    handle: "@duggu.durgesh_",
+    href: "https://instagram.com/duggu.durgesh_",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-5 h-5">
+        <rect x="3" y="3" width="18" height="18" rx="5" />
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
+      </svg>
+    )
+  },
+    {
+    name: "LinkedIn",
+    handle: "@durgesh--pal",
+    href: "https://www.linkedin.com/in/durgesh--pal/",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+        <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V23h-4V8.5zM8.5 8.5h3.83v1.98h.05c.53-1 1.85-2.06 3.8-2.06 4.07 0 4.82 2.68 4.82 6.16V23h-4v-6.7c0-1.6-.03-3.66-2.23-3.66-2.23 0-2.57 1.74-2.57 3.54V23h-4V8.5z" />
+      </svg>
+    )
+  },
+  {
+    name: "Gmail",
+    handle: "duggudurgeshpal@gmail.com",
+    href: "mailto:duggudurgeshpal@gmail.com",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-5 h-5">
+        <rect x="3" y="5" width="18" height="14" rx="2" />
+        <path d="M3 6.5L12 13L21 6.5" />
+      </svg>
+    )
+  }
+] as const;
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
@@ -88,7 +125,7 @@ export default function ContactPage() {
                   className="w-full border border-black/10 bg-white/70 rounded-lg px-3 py-2 text-sm mt-1 outline-none focus:border-gold transition-colors resize-none"
                 />
               </div>
-                          {error ? <p className="text-rust text-xs">{error}</p> : null}
+              {error ? <p className="text-rust text-xs">{error}</p> : null}
               <button
                 type="submit"
                 disabled={sending}
@@ -102,10 +139,21 @@ export default function ContactPage() {
 
         <div>
           <p className="text-xs uppercase tracking-widest2 text-stone mb-4">Support</p>
-          <div className="space-y-2 text-sm text-ink mb-8">
-            <p>duggudurgeshpal@gmail.com</p>
-            <p>@duggu.durgesh_ on Instagram</p>
-            
+          <div className="flex gap-4 mb-8">
+            {SOCIAL_LINKS.map((s) => (
+              <a
+                key={s.name}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col items-center gap-2"
+              >
+                <span className="w-12 h-12 rounded-full glass flex items-center justify-center text-ink group-hover:bg-gold group-hover:text-ivory group-hover:border-gold group-hover:scale-110 transition-all duration-300">
+                  {s.icon}
+                </span>
+                <span className="text-[10px] text-stone group-hover:text-ink transition-colors">{s.handle}</span>
+              </a>
+            ))}
           </div>
 
           <p className="text-xs uppercase tracking-widest2 text-stone mb-4">Quick answers</p>
