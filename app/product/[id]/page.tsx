@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import ProductGallery from "@/components/ProductGallery";
 import ProductCard from "@/components/ProductCard";
 import { getProductsPublic } from "@/lib/github";
+import Image from "next/image";
 
 export const revalidate = 30;
 
@@ -22,11 +23,12 @@ export default async function ProductDetailPage({ params }: { params: { id: stri
     <main className="bg-gradient-to-b from-white via-paper to-[#F3EEE3] min-h-screen">
       <header className="sticky top-0 z-50 glass border-x-0 border-t-0">
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
-          <Link href="/" className="font-display italic text-2xl tracking-tight text-ink">
-            The&nbsp;TrendyCart
-          </Link>
+          <a href="/" className="flex items-center gap-2">
+            <Image src="/logo.png" alt="TrendyCart" width={885} height={781} className="h-9 w-auto" priority />
+            <span className="font-display italic text-2xl tracking-tight text-ink">TrendyCart</span>
+          </a>
           <Link href="/" className="text-xs uppercase tracking-widest2 text-stone hover:text-ink transition-colors">
-            ← Back to the TrendyCart
+            ← Back
           </Link>
         </div>
       </header>

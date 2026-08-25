@@ -17,7 +17,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "The trendyCart — Curated Myntra Finds",
+  title: "The TrendyCart — Curated Myntra Finds",
   description: "A curated cart of the best Myntra deals, styled like a fashion editorial and loot deats."
 };
 
