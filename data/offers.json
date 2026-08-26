@@ -1,5 +1,21 @@
 [
   {
+    "id": "004fae58-081f-4a94-8629-39aee9ab46d8",
+    "title": "Swiggy Sibling Wars (Rakhi Special)",
+    "image": "https://media-assets.swiggy.com/portal/m/logo_192x192.png",
+    "details": "Swiggy Sibling Wars is an interactive, gamified Raksha Bandhan campaign on the Swiggy app where users pick sides, compete in mini-battles, and complete referral tasks to earn up to ₹200 in Swiggy Money / discount coupons for food and Instamart orders.",
+    "steps": [
+      "Open the Swiggy mobile app and locate the Rakhi Sibling Wars banner on the homepage.",
+      "Click to enter the game and select your side: Team Bro or Team Sis.",
+      "Tap on the invite/share button to generate your unique referral link.",
+      "Share the link with friends; when they click your link and join a team, ₹10 is credited to both of your Swiggy wallets.",
+      "Repeat the process to earn up to the maximum cap of ₹200 in free cash.",
+      "Apply your earned Swiggy Cash at checkout during your next food or Instamart order."
+    ],
+    "url": "https://events.swiggy.com/rakhi-spin-the-wheel",
+    "createdAt": "2026-08-26T18:11:44.795Z"
+  },
+  {
     "id": "916c4b83-9711-4668-b857-873fd38e3cea",
     "title": "Bigbasket - Maximum  ₹160 OFF",
     "image": "https://assets.entrepreneur.com/content/3x2/2000/20160302090451-Great-Grocery-Deals-at-BigBasket-with-Pennyful.jpeg",
