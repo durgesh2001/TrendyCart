@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Product } from "@/lib/github";
 import Pagination from "@/components/Pagination";
+import EditProductModal from "@/components/EditProductModal";
 
 export default function ProductManager({
   pageSize,
@@ -16,6 +17,7 @@ export default function ProductManager({
   const [page, setPage] = useState(1);
   const [toDelete, setToDelete] = useState<Product | null>(null);
   const [deleting, setDeleting] = useState(false);
+  const [editing, setEditing] = useState<Product | null>(null);
   const [toast, setToast] = useState("");
 
   useEffect(() => {
@@ -60,6 +62,12 @@ export default function ProductManager({
     }
   }
 
+  function handleUpdated(updated: Product) {
+    setProducts((prev) => prev.map((p) => (p.id === updated.id ? updated : p)));
+    setEditing(null);
+    setToast("Product updated.");
+  }
+
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
@@ -98,12 +106,20 @@ export default function ProductManager({
                   <p className="text-sm text-ink truncate">{p.title}</p>
                   <p className="text-xs text-stone mt-0.5">₹{p.price?.toLocaleString("en-IN")}</p>
                 </div>
-                <button
-                  onClick={() => setToDelete(p)}
-                  className="text-xs uppercase tracking-widest2 text-rust hover:text-red-700 border border-rust/30 hover:border-rust rounded-lg px-4 py-2 transition-colors flex-shrink-0"
-                >
-                  Delete
-                </button>
+                <div className="flex gap-2 flex-shrink-0">
+                  <button
+                    onClick={() => setEditing(p)}
+                    className="text-xs uppercase tracking-widest2 text-gold hover:text-goldLight border border-gold/30 hover:border-gold rounded-lg px-4 py-2 transition-colors"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => setToDelete(p)}
+                    className="text-xs uppercase tracking-widest2 text-rust hover:text-red-700 border border-rust/30 hover:border-rust rounded-lg px-4 py-2 transition-colors"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -111,6 +127,10 @@ export default function ProductManager({
           <Pagination page={page} totalPages={totalPages} onChange={setPage} />
         </>
       )}
+
+      {editing ? (
+        <EditProductModal product={editing} onClose={() => setEditing(null)} onSaved={handleUpdated} />
+      ) : null}
 
       {toDelete ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 backdrop-blur-sm px-6">

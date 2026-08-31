@@ -99,6 +99,31 @@ async function removeItem<T extends { id: string }>(filePath: string, id: string
   return commit(filePath, `Remove ${id}`, next, sha);
 }
 
+// Updates one item in place by id, preserving every field not explicitly
+// passed in `updates` (e.g. createdAt) and never letting the id itself change.
+async function updateItem<T extends { id: string }>(
+  filePath: string,
+  id: string,
+  updates: Partial<T>
+): Promise<{ items: T[]; updated: T | null }> {
+  const { items, sha } = await readWithSha<T>(filePath);
+
+  let updated: T | null = null;
+  const next = items.map((item) => {
+    if (item.id !== id) return item;
+    updated = { ...item, ...updates, id: item.id };
+    return updated;
+  });
+
+  if (!updated) {
+    // Nothing matched — return the untouched list rather than committing a no-op write.
+    return { items, updated: null };
+  }
+
+  const committed = await commit(filePath, `Update ${id}`, next, sha);
+  return { items: committed, updated };
+}
+
 // ---- Products ----
 
 const PRODUCTS_FILE = "data/products.json";
@@ -106,6 +131,8 @@ const PRODUCTS_FILE = "data/products.json";
 export const getProductsPublic = () => readPublic<Product>(PRODUCTS_FILE);
 export const saveProduct = (product: Product) => addItem(PRODUCTS_FILE, product);
 export const deleteProduct = (id: string) => removeItem<Product>(PRODUCTS_FILE, id);
+export const updateProduct = (id: string, updates: Partial<Product>) =>
+  updateItem<Product>(PRODUCTS_FILE, id, updates);
 
 // ---- Other Offers ----
 
